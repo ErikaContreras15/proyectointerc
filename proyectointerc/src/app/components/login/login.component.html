@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Si tienes un archivo CSS separado -->
+</head>
+<body>
+  <div class="container">
+    <h1>Iniciar sesión</h1>
+    <form>
+      <div class="form-group">
+        <label for="email" class="label">Correo electrónico:</label>
+        <input type="email" id="email" name="email" class="input" required>
+      </div>
+      <div class="form-group">
+        <label for="password" class="label">Contraseña:</label>
+        <input type="password" id="password" name="password" class="input" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="button">Iniciar sesión</button>
+      </div>
+      <div class="form-group">
+        <button type="button" class="google-button" (click)="signInWithGoogle()">Iniciar sesión con Google</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+
+
+
+
