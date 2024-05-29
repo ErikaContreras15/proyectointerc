@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { AuthService } from '../../servicios/auth-service.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -30,7 +30,12 @@ export class LoginComponent {
     });
   }
 
-  async login() {
+  async login(form: NgForm) {
+    if (form.invalid) {
+      this.errorMessage = 'Por favor, complete todos los campos correctamente.';
+      return;
+    }
+
     try {
       await this.authService.login(this.email, this.password);
       this.router.navigate(['/']);

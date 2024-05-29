@@ -18,7 +18,9 @@ export class RegistroComponent {
   lastName: string = '';
   email: string = '';
   password: string = '';
+  tipo: string = '';
   errorMessage: string = '';
+
 
   constructor(private authService: AuthService, private router: Router) {}
 
