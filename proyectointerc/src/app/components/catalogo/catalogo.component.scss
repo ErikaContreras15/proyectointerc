@@ -1,0 +1,237 @@
+
+//-------------------------------------------------Encabezado------------------------------------------------
+.header-container {
+    background-color: #bae1e7;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .header-container .column {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .seccion-tres-columnas {
+    background-color: #bae1e7;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1px;
+  }
+  
+  .seccion-tres-columnas .column {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .seccion-tres-columnas .column input {
+    width: 70%;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+  
+  .seccion-tres-columnas .column .tabs {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .seccion-tres-columnas .column .tabs span {
+    flex: 1;
+    background-color: #120101;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #0c010178;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .seccion-tres-columnas .column .tabs span:not(:last-child) {
+    margin-right: 5px;
+  }
+  
+  .seccion-tres-columnas .column .tabs span a {
+    text-decoration: none;
+    color: rgb(216, 165, 25);
+  }
+  
+  .seccion-tres-columnas .column button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 50%;
+  }
+  
+  .seccion-tres-columnas .column button img {
+    max-width: 100%;
+    width: 30px;
+  }
+  
+  .logo-img {
+    width: 85px;
+  }
+  
+  .search-button {
+    width: 25px;
+  }
+
+//------------------------------BOBY-----------------------------------------------------
+.productos {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product-card {
+  display: flex;
+  width: 48%; /* Ajusta este valor según la cantidad de productos que quieres por fila */
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #e5dfdf;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.product-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-info span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.product-info input[type="number"] {
+  width: 50px;
+}
+
+.product-info img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  width: 100%; /* Para que el título ocupe toda la fila */
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .product-card img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .product-info {
+    align-items: center;
+  }
+
+  .product-info span {
+    text-align: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------Footer------------------------------------------------
+.footer {background-color: #000000;color: #ffffff;padding: 20px;display: flex;justify-content: space-between;align-items: flex-start;flex-wrap: wrap;
+    .footer-column {font-family: Arial, sans-serif;flex: 1;margin-right: 20px;text-align: justify;
+      h3 {font-size: 18px;margin-bottom: 10px;}
+      p {margin: 5px 0;}
+      ul {list-style-type: none;padding: 0;margin: 0;li {margin: 5px 0;}}
+      .footer-center{text-align: center;}
+      .footer-end{text-align: center;}
+      .social-icons {img {width: 25px;margin-right: 15px;}}
+    }
+    .slogan {text-align: center;width: 100%;margin-top: 20px;font-style: italic;font-size: 16px;}
+  }
