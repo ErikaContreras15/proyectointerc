@@ -1,5 +1,4 @@
 
-
   <!------------------------------------------ ENCABEZADO ---------------------------------------------------->
   <div class="header-container">
     <div class="column">
@@ -36,60 +35,89 @@
       <button onclick="window.location.href = 'carrito';">
         <img src="../../../assets/imgs/carrito.png" alt="Carrito">
       </button>
-    
+      <p>Iniciar Sesión</p>
+      <button onclick="window.location.href = 'inicio';">
+        <img src="../../../assets/imgs/user.jpg" alt="Perfil">
+      </button>
+
+
+
+
     </div>
   </div>
 
-
-
-<!-----------------------------------BOBY------------------------------------------->
-<div class="container">
-  <div class="container">
-    <div class="izq">
-      <img class="imagen" src="../.././../assets/imgs/QQ.jpg" alt="Imagen de login">
-    </div>
+  <!----------------------------------PORTADA-------------------------------------------------->
+  <div class="portada">
+    <img src="../../../assets/imgs/PRI.PNG" alt="Portada">
   </div>
 
 
-  <div class="registration-form">
-    <h1>Registro</h1>
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-      <div class="form-group">
-        <label for="firstName" class="label">Nombre:</label>
-        <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" class="input" required>
-        <div *ngIf="form.submitted && !firstName" class="error-message">
-          El nombre es requerido.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="lastName" class="label">Apellido:</label>
-        <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" class="input" required>
-        <div *ngIf="form.submitted && !lastName" class="error-message">
-          El apellido es requerido.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email" class="label">Correo electrónico:</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email" class="input" required email>
-        <div *ngIf="form.submitted && !form.controls['email'].valid" class="error-message">
-          Por favor, ingrese un correo electrónico válido.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="label">Contraseña:</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" class="input" required>
-        <div *ngIf="form.submitted && password.length < 6" class="error-message">
-          La contraseña debe tener al menos 6 caracteres.
-        </div>
-      </div>
-      <button type="submit" class="button">Registrar</button>
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-    </form>
-    <button (click)="redirectToLogin()" class="button">Ya tienes cuenta? Inicia sesión</button>
+<!--------------------------------------------BOBY------------------------------------------------------------>
+<!--------------------------------------AREAS-------------------------------------->
+<div class="centered-title">
+  <h1> ÁREAS</h1>
+</div>    
+<div class="options-grid">
+  <div class="option">
+    <div class="image-container">
+      <img src="../../../assets/imgs/NN.PNG" alt="Imagen 1">
+        <div class="text-container"> Infantil y juvenil </div>
+    </div>
+  </div>  
+  <div class="option">
+    <div class="image-container">
+      <img src="../../../assets/imgs/SS.jpg" alt="Imagen 2">
+        <div class="text-container">Ciencia ficción y fantasía</div>
+    </div>
+  </div>
+  <div class="option">
+    <div class="image-container">
+      <img src="../../../assets/imgs/WS.PNG"  alt="Imagen 3">
+      <div class="text-container">Filosofía y pensamiento</div>
+    </div>
   </div>
 </div>
+   
+<!--------------------------------------BENEFICIOS-------------------------------------->
+<div class="container centered-title">
+  <h1>BENEFICIOS</h1>
+  <div class="options-grid">
+    <div class="option">
+      <div class="image-container">
+        <img src="..//../../assets/imgs/AA.PNG" alt="LECTURA" width="200">
+        <div class="text-container">
+          <p>ALCANCE LITERARIO <br>
+            Un cuerpo de resúmenes y reseñas sobre títulos dignos de su consideración.</p>
+        </div>
+      </div>
+    </div>
+    <div class="option">
+      <div class="image-container">
+        <img src="../../../assets/imgs/UU.PNG" alt="Ubicacion" width="200">
+        <div class="text-container">
+          <p>ENTREGAS A DOMICILIO <br>
+            Recíbe tus compras directamente en tu hogar. Hacemos envíos a todo el Ecuador</p>
+        </div>
+      </div>
+    </div>
+    <div class="option">
+      <div class="image-container">
+        <img src="../../../assets/imgs/BB.PNG" alt="Bonos" width="200">
+        <div class="text-container">
+          <p>BONOBOOKS <br>
+            Regala tarjetas BonoBooks. Conoce más sobre sus beneficios.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 
 
 
@@ -134,4 +162,3 @@
   </div>
   <p class="slogan">® 2018- 2025 -Paraíso de los libros- Todos los derechos reservados - </p>
 </footer>
-

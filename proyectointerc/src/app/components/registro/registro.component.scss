@@ -1,8 +1,100 @@
+/* Contenedor de la página para abarcar todo el contenido */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Contenido principal debe tomar el resto del espacio */
+.content-wrap {
+  flex: 1;
+}
+
+/* Estilos para el encabezado */
+.header-container {
+  background-color: #bae1e7;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-container .column {
+  flex: 1;
+  text-align: center;
+}
+
+.seccion-tres-columnas {
+  background-color: #bae1e7;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1px;
+}
+
+.seccion-tres-columnas .column {
+  flex: 1;
+  text-align: center;
+}
+
+.seccion-tres-columnas .column input {
+  width: 70%;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.seccion-tres-columnas .column .tabs {
+  display: flex;
+  margin-top: 10px;
+}
+
+.seccion-tres-columnas .column .tabs span {
+  flex: 1;
+  background-color: #120101;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid #0c010178;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.seccion-tres-columnas .column .tabs span:not(:last-child) {
+  margin-right: 5px;
+}
+
+.seccion-tres-columnas .column .tabs span a {
+  text-decoration: none;
+  color: rgb(216, 165, 25);
+}
+
+.seccion-tres-columnas .column button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 10px;
+  border-radius: 50%;
+}
+
+.seccion-tres-columnas .column button img {
+  max-width: 100%;
+  width: 30px;
+}
+
+.logo-img {
+  width: 85px;
+}
+
+.search-button {
+  width: 25px;
+}
+
+/* Contenedor principal */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -55,3 +147,36 @@
   background-color: #0056b3;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------Footer------------------------------------------------
+.footer {background-color: #000000;color: #ffffff;padding: 20px;display: flex;justify-content: space-between;align-items: flex-start;flex-wrap: wrap;
+  .footer-column {font-family: Arial, sans-serif;flex: 1;margin-right: 20px;text-align: justify;
+    h3 {font-size: 18px;margin-bottom: 10px;}
+    p {margin: 5px 0;}
+    ul {list-style-type: none;padding: 0;margin: 0;li {margin: 5px 0;}}
+    .footer-center{text-align: center;}
+    .footer-end{text-align: center;}
+    .social-icons {img {width: 25px;margin-right: 15px;}}
+  }
+  .slogan {text-align: center;width: 100%;margin-top: 20px;font-style: italic;font-size: 16px;}
+}
