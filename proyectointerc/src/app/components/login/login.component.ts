@@ -24,7 +24,7 @@ export class LoginComponent {
 
   signInWithGoogle() {
     this.authService.signInWithGoogle().then(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/inicio']);
     }).catch((error) => {
       this.errorMessage = error.message;
     });
@@ -38,7 +38,7 @@ export class LoginComponent {
 
     try {
       await this.authService.login(this.email, this.password);
-      this.router.navigate(['/']);
+      this.router.navigate(['/inicio']);
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.errorMessage = error.message;
