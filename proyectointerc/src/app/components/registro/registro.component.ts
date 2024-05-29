@@ -3,11 +3,14 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../servicios/auth-service.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.scss']
+  styleUrl: './registro.component.scss'
 })
 export class RegistroComponent {
   firstName: string = '';
