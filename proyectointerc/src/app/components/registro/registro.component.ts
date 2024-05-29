@@ -3,12 +3,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../servicios/auth-service.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss'
 })
@@ -17,25 +18,32 @@ export class RegistroComponent {
   lastName: string = '';
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    this.errorMessage = ''; 
+    if (!form.valid) {
+      this.errorMessage = 'Por favor, complete el formulario correctamente.';
+      return;
+    }
+
     if (this.password.length < 6) {
-      console.error('La contraseña debe tener al menos 6 caracteres.');
-      return; // Detener el proceso de registro si la contraseña es demasiado corta
+      this.errorMessage = 'La contraseña debe tener al menos 6 caracteres.';
+      return; 
     }
 
     this.authService.registrar(this.email, this.password)
       .then(() => {
-        console.log('Usuario registrado exitosamente');
+        this.router.navigate(['/login']); 
       })
       .catch(error => {
-        console.error('Error al registrar usuario:', error);
+        this.errorMessage = 'Error al registrar usuario: ' + error.message;
       });
   }
 
   redirectToLogin() {
-    this.router.navigate(['/login']); // Redirecciona al componente de inicio de sesión
+    this.router.navigate(['/login']); 
   }
 }
