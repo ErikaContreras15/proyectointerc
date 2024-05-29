@@ -1,8 +1,6 @@
 
-export const environments={
-
-production: false,
-    firebaseConfig: {
+export const environments = {
+  firebaseConfig: {
     apiKey: "AIzaSyDUEbkqrzAohecjMmpMGZ6uONGv8Q11cA0",
     authDomain: "proyectointerc.firebaseapp.com",
     projectId: "proyectointerc",
