@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { Usuario } from '../domain/Usuario';
 import { Firestore } from '@angular/fire/firestore';
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { Observable } from 'rxjs';
+import { authState } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -99,37 +101,22 @@ export class AuthService {
     }
   }
 
-  getAuthState(): Promise<User | null> {
-    return new Promise((resolve, reject) => {
-      const unsubscribe = this.auth.onAuthStateChanged(user => {
-        unsubscribe();
-        resolve(user);
-      }, reject);
-    });
+  getAuthState(): Observable<User | null> {
+    return authState(this.auth); 
   }
 
-  async getRolUsuario(): Promise<string> {
-    if (!this.auth.currentUser) {
-      throw new Error('No hay usuario autenticado');
+  async getRolUsuario(): Promise<string | null> {
+    const user = this.auth.currentUser;
+    if (user) {
+      const userDocRef = doc(this.db, `usuarios/${user.uid}`);
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
+      return userData ? userData['rol'] : null;
     }
-    const userDocRef = doc(this.db, 'usuarios', this.auth.currentUser.uid);
-    const userDoc = await getDoc(userDocRef);
-    if (userDoc.exists()) {
-      const usuario = userDoc.data() as Usuario;
-      return usuario.rol;
-    } else {
-      throw new Error('El usuario no existe en la base de datos');
-    }
+    return null;
   }
 
 
-
-
-
-
-
-
-  
   async getUsuario(uid: string): Promise<Usuario> {
     try {
       const userDocRef = doc(this.db, 'usuarios', uid);
@@ -146,9 +133,9 @@ export class AuthService {
 
   async actualizarUsuario(usuario: Usuario): Promise<void> {
     try {
-      const { id, ...userData } = usuario; // Desestructura el objeto Usuario
+      const { id, ...userData } = usuario;
       const userDocRef = doc(this.db, 'usuarios', usuario.id);
-      await updateDoc(userDocRef, userData); // Pasa userData en lugar del objeto Usuario completo
+      await updateDoc(userDocRef, userData); 
     } catch (error) {
       throw error;
     }
@@ -182,11 +169,13 @@ export class AuthService {
     }
   }
 
-  
-  
-
-  
-}
-
-
-
+  async esAdministrador(): Promise<boolean> {
+    try {
+      const rol = await this.getRolUsuario();
+      return rol === 'administrador';
+    } catch (error) {
+      console.error('Error al verificar si el usuario es administrador:', error);
+      throw error;
+    }
+  }
+}  

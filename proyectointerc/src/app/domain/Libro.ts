@@ -1,9 +1,11 @@
 export class Libro {
     id: string = '';
     titulo: string = '';
-    autor: string = '';
+    idioma: string = '';
     descripcion: string = '';
     precio: number = 0;
-    categoriaid: string = '';
+    cantidad: number = 0;
+    url:string ='';
     disponible: boolean = true;
+    
 }

@@ -5,6 +5,7 @@ import { AuthService } from '../../servicios/auth-service.service';
 import { User } from 'firebase/auth';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -26,6 +27,21 @@ export class InicioComponent implements OnInit{
 
   ngOnInit(): void {
     this.cargarInformacionUsuario();
+    this.checkAuthState();
+  }
+
+
+  async checkAuthState() {
+    try {
+      const user = await firstValueFrom(this.authService.getAuthState());
+      if (user) {
+        console.log('El usuario ha iniciado sesión:', user);
+      } else {
+        console.log('Ningún usuario ha iniciado sesión.');
+      }
+    } catch (error) {
+      console.error('Error al comprobar el estado de autenticación:', error);
+    }
   }
 
 
@@ -51,24 +67,20 @@ export class InicioComponent implements OnInit{
   }
 
 
-  cargarInformacionUsuario() {
-    this.authService.getAuthState()
-      .then((user: User | null) => {
-        if (user) {
-          this.authService.cargarInformacionUsuario().then((usuario: Usuario) => {
-            this.usuario = usuario;
-            this.esCliente = usuario.rol === 'cliente'; // Verifica si el usuario es cliente
-          }).catch(error => {
-            console.error('Error al cargar la información del usuario:', error);
-          });
-        } else {
-          console.error('No hay usuario autenticado');
-        }
-      })
-      .catch(error => {
-        console.error('Error al obtener el estado de autenticación:', error);
-      });
-  }  
+  async cargarInformacionUsuario() {
+    try {
+      const user = await firstValueFrom(this.authService.getAuthState());
+      if (user) {
+        const usuario = await this.authService.cargarInformacionUsuario();
+        this.usuario = usuario;
+        this.esCliente = usuario.rol === 'cliente';
+      } else {
+        console.error('No hay usuario autenticado');
+      }
+    } catch (error) {
+      console.error('Error al cargar la información del usuario:', error);
+    }
+  }
 
   
 

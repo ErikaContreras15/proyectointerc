@@ -1,0 +1,11 @@
+
+<div *ngFor="let libro of libros">
+    <!-- Mostrar detalles del libro -->
+    <div>{{ libro.titulo }}</div>
+    <div>{{ libro.autor }}</div>
+    <!-- Mostrar otras propiedades del libro -->
+  
+    <!-- Agregar botón de edición si el usuario es administrador -->
+    <button *ngIf="esAdministrador()" (click)="editarLibro(libro)">Editar</button>
+  </div>
+  
