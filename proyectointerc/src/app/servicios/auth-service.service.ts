@@ -1,17 +1,24 @@
+
 import { Injectable } from '@angular/core';
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, Auth, signOut, signInWithEmailAndPassword, UserCredential, onAuthStateChanged } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { environments } from '../../environments';
+import { Router } from '@angular/router';
+import { Usuario } from '../domain/Usuario';
+import { Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private auth: Auth;
+  private db: Firestore;
 
-  constructor() {
+  constructor(private router: Router) {
     const app = initializeApp(environments.firebaseConfig);
     this.auth = getAuth(app);
+    this.db = getFirestore(app);
   }
 
   signInWithGoogle() {
@@ -22,11 +29,31 @@ export class AuthService {
       });
   }
 
-  registrar(correo: string, contraseña: string) {
-    return createUserWithEmailAndPassword(this.auth, correo, contraseña)
-      .catch(error => {
-        console.error('Error al registrar usuario:', error);
-      });
+  async registrar(correo: string, contraseña: string, nombre: string, usuario: string, rol: 'cliente' | 'administrador' = 'cliente') {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, correo, contraseña);
+      const user = userCredential.user;
+      const nuevoUsuario: Usuario = {
+        id: user.uid,
+        nombre,
+        email: correo,
+        usuario,
+        contrasena: contraseña,
+        rol,
+      };
+      await this.agregarUsuarioBD(nuevoUsuario);
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+    }
+  }
+
+  private async agregarUsuarioBD(usuario: Usuario) {
+    try {
+      const usuariosRef = collection(this.db, 'usuarios');
+      await addDoc(usuariosRef, usuario);
+    } catch (error) {
+      console.error('Error al agregar usuario a la base de datos:', error);
+    }
   }
 
   signOut() {
@@ -37,14 +64,33 @@ export class AuthService {
     return !!this.auth.currentUser;
   }
 
-  async login(email: string, password: string): Promise<void> {
+  async login(usuario: string, contrasena: string): Promise<void> {
     try {
-      await signInWithEmailAndPassword(this.auth, email, password);
+      const usuariosRef = collection(this.db, 'usuarios');
+      const q = query(usuariosRef, where('usuario', '==', usuario), where('contrasena', '==', contrasena));
+      const querySnapshot = await getDocs(q);
+  
+      if (querySnapshot.empty) {
+        throw new Error('Credenciales incorrectas');
+      }
+  
+      const userDoc = querySnapshot.docs[0];
+      const userData = userDoc.data() as Usuario;
+  
+      await signInWithEmailAndPassword(this.auth, userData.email, contrasena);
+  
+      const rol = userData.rol;
+      if (rol === 'cliente') {
+        this.router.navigate(['/cliente']);
+      } else if (rol === 'administrador') {
+        this.router.navigate(['/admin']);
+      }
     } catch (error: any) {
       console.error('Error de inicio de sesión:', error);
       throw new Error(error.message);
     }
   }
+  
   async logout(): Promise<void> {
     try {
       return await signOut(this.auth);
@@ -60,5 +106,21 @@ export class AuthService {
       }, reject);
     });
   }
-  
+
+  async getRolUsuario(): Promise<string> {
+    if (!this.auth.currentUser) {
+      throw new Error('No hay usuario autenticado');
+    }
+    const userDocRef = doc(this.db, 'usuarios', this.auth.currentUser.uid);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      const usuario = userDoc.data() as Usuario;
+      return usuario.rol;
+    } else {
+      throw new Error('El usuario no existe en la base de datos');
+    }
+  }
 }
+
+
+

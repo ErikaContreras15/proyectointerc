@@ -1,8 +1,17 @@
+/* Contenedor de la página para abarcar todo el contenido */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilos para el encabezado */
 .header-container {
   background-color: #bae1e7;
   color: white;
   display: flex;
   justify-content: space-between;
+  padding: 10px 20px;
 }
 
 .header-container .column {
@@ -15,7 +24,7 @@
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 1px;
+  padding: 10px 20px;
 }
 
 .seccion-tres-columnas .column {
@@ -77,35 +86,11 @@
   width: 25px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//--------------------------------BOBY---------------------------------------------------------------------------------------------------
+/* Contenedor principal */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -117,104 +102,70 @@
   align-items: center;
 }
 
-.der {
-  flex: 1;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
 .imagen {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
 }
 
-h1 {
-  margin-bottom: 10px;
-}
-
-.form-group {
-  margin-bottom: 15px;
+.der {
+  flex: 1;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .label {
-  display: block;
   margin-bottom: 5px;
-  font-weight: bold;
 }
 
 .input {
-  width: 100%;
+  width: calc(100% - 20px);
   padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .button {
-  width: 100%;
+  width: calc(100% - 20px);
   padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .button:hover {
   background-color: #0056b3;
 }
 
-.google-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #db4437;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
 
-.google-button:hover {
-  background-color: #c23321;
-}
-
+.google-button,
 .facebook-button {
   width: 100%;
   padding: 10px;
-  background-color: #3b5998;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
+  background-color: #4285f4; 
+}
+
+.facebook-button {
+  background-color: #3b5998; 
+}
+
+.google-button:hover {
+  background-color: #357ae8; 
 }
 
 .facebook-button:hover {
-  background-color: #2d4373;
+  background-color: #2d4373; 
 }
 
 
-
-
-
-
-
-
-
-
-//-------------------------------------------------Footer------------------------------------------------
-.footer {background-color: #000000;color: #ffffff;padding: 20px;display: flex;justify-content: space-between;align-items: flex-start;flex-wrap: wrap;
-  .footer-column {font-family: Arial, sans-serif;flex: 1;margin-right: 20px;text-align: justify;
-    h3 {font-size: 18px;margin-bottom: 10px;}
-    p {margin: 5px 0;}
-    ul {list-style-type: none;padding: 0;margin: 0;li {margin: 5px 0;}}
-    .footer-center{text-align: center;}
-    .footer-end{text-align: center;}
-    .social-icons {img {width: 25px;margin-right: 15px;}}
-  }
-  .slogan {text-align: center;width: 100%;margin-top: 20px;font-style: italic;font-size: 16px;}
-}

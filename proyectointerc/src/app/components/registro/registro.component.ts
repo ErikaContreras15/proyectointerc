@@ -5,6 +5,7 @@ import { AuthService } from '../../servicios/auth-service.service';
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Usuario } from '../../domain/Usuario';
 
 @Component({
   selector: 'app-registro',
@@ -14,13 +15,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './registro.component.scss'
 })
 export class RegistroComponent {
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  password: string = '';
-  tipo: string = '';
+  usuario: Usuario = new Usuario();
   errorMessage: string = '';
-
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -31,12 +27,12 @@ export class RegistroComponent {
       return;
     }
 
-    if (this.password.length < 6) {
+    if (this.usuario.contrasena.length < 6) {
       this.errorMessage = 'La contraseña debe tener al menos 6 caracteres.';
       return; 
     }
 
-    this.authService.registrar(this.email, this.password)
+    this.authService.registrar(this.usuario.email, this.usuario.contrasena, this.usuario.nombre, this.usuario.usuario, this.usuario.rol)
       .then(() => {
         this.router.navigate(['/login']); 
       })

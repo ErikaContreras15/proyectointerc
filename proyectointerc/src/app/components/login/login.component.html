@@ -37,25 +37,27 @@
   </div>
 </div>
 
+<!------------------------------------------BOBY----------------------------->
 <div class="container">
-  <div class="izq">
+  <div class="izq imagen">
     <img class="imagen" src="../.././../assets/imgs/QQ.jpg" alt="Imagen de login">
   </div>
+
   <div class="der">
     <h1>Iniciar sesión</h1>
     <form #form="ngForm" (ngSubmit)="login(form)">
       <div class="form-group">
-        <label for="email" class="label">Correo electrónico:</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email" class="input" required email>
-        <div *ngIf="form.submitted && !form.controls['email']?.valid" class="error-message">
-          Por favor, ingrese un correo electrónico válido.
+        <label for="usuario" class="label">Usuario:</label>
+        <input type="text" id="usuario" [(ngModel)]="usuario.usuario" name="usuario" class="input" required>
+        <div *ngIf="form.submitted && !usuario.usuario" class="error-message">
+          El usuario es requerido.
         </div>
       </div>
       
       <div class="form-group">
-        <label for="password" class="label">Contraseña:</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" class="input" required>
-        <div *ngIf="form.submitted && password.length < 6" class="error-message">
+        <label for="contrasena" class="label">Contraseña:</label>
+        <input type="password" id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena" class="input" required>
+        <div *ngIf="form.submitted && usuario.contrasena.length < 6" class="error-message">
           La contraseña debe tener al menos 6 caracteres.
         </div>
       </div>
@@ -75,48 +77,6 @@
       </div>
     </form>
   </div>
-</div>
+  
 
-
-
-
-<!--------------------------------------FOOTER-------------------------------------->
-<footer class="footer">
-  <div class="footer-column">
-    <h3>CONTACTO</h3>
-    <p>🎧 Atención al cliente 24/7: (+593)927314029</p>
-    
-    <div class="social-icons">
-      <img src="../../../assets/imgs/facebook.png" alt="facebook" >
-      <img src="../../../assets/imgs/instagram.jpg" alt="instagram">
-      <img src="../../../assets/imgs/youtube.png" alt="youtube">
-     
-      <img src="../../../assets/imgs/tik-tok.png" alt="tiktok">
-      <img src="../../../assets/imgs/gorjeo.png" alt="twitter">
-    </div>
-  </div>
-  <div class="footer-column">
-    <div class="footer-center">
-      <h3>Por qué comprar</h3>
-      <ul>
-       
-        <li><u>Centro de ayuda en linea</u></li>
-        <li><u>Política de devolucion de productos</u></li>
-        <li><u>Términos y condiciones</u></li>
-        
-        <li><u>Propiedad intelectual</u></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-column">
-    <div class="footer-end">
-      <h3>MÉTODOS DE PAGO</h3>
-      <div class="social-icons">
-        <img src="../../../assets/imgs/visa.jpg" alt="Visa" >
-        <img src="../../../assets/imgs/paypal.png" alt="Paypal" >
-        <img src="../../../assets/imgs/tarjeta.png" alt="MasterCard" >
-      </div>
-    </div>
-  </div>
-  <p class="slogan">® 2018- 2025 -Paraíso de los libros- Todos los derechos reservados - </p>
-</footer>
+  
