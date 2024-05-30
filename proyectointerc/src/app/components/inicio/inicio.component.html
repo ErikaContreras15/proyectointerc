@@ -35,10 +35,44 @@
       <button onclick="window.location.href = 'carrito';">
         <img src="../../../assets/imgs/carrito.png" alt="Carrito">
       </button>
-      <p>Iniciar Sesión</p>
-      <button onclick="window.location.href = 'inicio';">
-        <img src="../../../assets/imgs/user.jpg" alt="Perfil">
+      
+
+      <button (click)="toggleUserInfo()">
+        <img src="../../../assets/imgs/user.jpg" alt="Perfil"> Mi perfil
       </button>
+      
+      <div *ngIf="mostrarInfoUsuario">
+        <h2>Información del usuario</h2>
+        <p><strong>Nombre:</strong> {{ usuario.nombre || 'Usuario no disponible' }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <p><strong>Usuario:</strong> {{ usuario.usuario || 'Usuario no disponible' }}</p>
+      
+        <div *ngIf="esCliente">
+          <button (click)="habilitarEdicion()">Editar Perfil</button>
+          <div *ngIf="edicionHabilitada">
+            <label>
+              Nombre:
+              <input [(ngModel)]="usuario.nombre" placeholder="Nombre">
+            </label>
+            <label>
+              Usuario:
+              <input [(ngModel)]="usuario.usuario" placeholder="Usuario">
+            </label>
+            <button (click)="guardarCambios()">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!usuario">
+        <p>No hay usuario autenticado.</p>
+      </div>
+      
+
+      
+      
+      
+
+      
 
 
 

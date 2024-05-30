@@ -1,12 +1,12 @@
 
 import { Injectable } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, Auth, signOut, signInWithEmailAndPassword, UserCredential, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, Auth, signOut, signInWithEmailAndPassword, UserCredential, onAuthStateChanged, User, updateProfile } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { environments } from '../../environments';
 import { Router } from '@angular/router';
 import { Usuario } from '../domain/Usuario';
 import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -99,9 +99,10 @@ export class AuthService {
     }
   }
 
-  getAuthState() {
+  getAuthState(): Promise<User | null> {
     return new Promise((resolve, reject) => {
-      onAuthStateChanged(this.auth, user => {
+      const unsubscribe = this.auth.onAuthStateChanged(user => {
+        unsubscribe();
         resolve(user);
       }, reject);
     });
@@ -120,6 +121,71 @@ export class AuthService {
       throw new Error('El usuario no existe en la base de datos');
     }
   }
+
+
+
+
+
+
+
+
+  
+  async getUsuario(uid: string): Promise<Usuario> {
+    try {
+      const userDocRef = doc(this.db, 'usuarios', uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        return userDoc.data() as Usuario;
+      } else {
+        throw new Error('El usuario no existe en la base de datos');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async actualizarUsuario(usuario: Usuario): Promise<void> {
+    try {
+      const { id, ...userData } = usuario; // Desestructura el objeto Usuario
+      const userDocRef = doc(this.db, 'usuarios', usuario.id);
+      await updateDoc(userDocRef, userData); // Pasa userData en lugar del objeto Usuario completo
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  cargarInformacionUsuario(): Promise<Usuario> {
+    return new Promise<Usuario>((resolve, reject) => {
+      const user = this.auth.currentUser;
+      if (user) {
+        const usuario: Usuario = {
+          id: user.uid,
+          nombre: user.displayName || '',
+          email: user.email || '',
+          usuario: user.displayName || '',
+          contrasena: '',
+          rol: 'cliente'
+        };
+        resolve(usuario);
+      } else {
+        reject('No hay usuario autenticado');
+      }
+    });
+  }
+
+  actualizarNombreUsuario(nombre: string): Promise<void> {
+    const user = this.auth.currentUser;
+    if (user) {
+      return updateProfile(user, { displayName: nombre });
+    } else {
+      return Promise.reject('No hay usuario autenticado');
+    }
+  }
+
+  
+  
+
+  
 }
 
 
