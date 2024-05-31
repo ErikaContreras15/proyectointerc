@@ -4,5 +4,5 @@ export class Usuario {
   email: string = '';
   usuario: string = '';
   contrasena: string = '';
-  rol: 'cliente' | 'administrador' = 'cliente'; // Agregar campo de rol
+  rol?: 'cliente' | 'administrador' ; 
 }

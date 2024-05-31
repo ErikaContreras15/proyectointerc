@@ -73,7 +73,7 @@ export class InicioComponent implements OnInit{
       if (user) {
         const usuario = await this.authService.cargarInformacionUsuario();
         this.usuario = usuario;
-        this.esCliente = usuario.rol === 'cliente';
+        //this.esCliente = usuario.rol === 'cliente';
       } else {
         console.error('No hay usuario autenticado');
       }

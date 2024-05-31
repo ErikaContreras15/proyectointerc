@@ -43,20 +43,22 @@ export class AuthService {
         contrasena: contraseña,
         rol,
       };
+      console.log('Rol al registrar:', rol); // Verificación adicional
       await this.agregarUsuarioBD(nuevoUsuario);
     } catch (error) {
       console.error('Error al registrar usuario:', error);
     }
+  }  
+private async agregarUsuarioBD(usuario: Usuario) {
+  try {
+    const usuariosRef = doc(this.db, 'usuarios', usuario.id); // Usar doc para asegurar el ID correcto
+    console.log('Usuario a agregar en BD:', usuario); // Verificación adicional
+    await setDoc(usuariosRef, usuario); // Usar setDoc en lugar de addDoc
+  } catch (error) {
+    console.error('Error al agregar usuario a la base de datos:', error);
   }
+}
 
-  private async agregarUsuarioBD(usuario: Usuario) {
-    try {
-      const usuariosRef = collection(this.db, 'usuarios');
-      await addDoc(usuariosRef, usuario);
-    } catch (error) {
-      console.error('Error al agregar usuario a la base de datos:', error);
-    }
-  }
 
   signOut() {
     return signOut(this.auth);
